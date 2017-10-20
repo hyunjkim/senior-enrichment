@@ -13744,7 +13744,7 @@ var Campus_Edit = function (_Component) {
     key: 'render',
     value: function render() {
 
-      return this.state.redirect ? _react2.default.createElement(_reactRouterDom.Redirect, { to: '/allcampuses' }) : _react2.default.createElement(
+      return this.state.redirect ? _react2.default.createElement(_reactRouterDom.Redirect, { to: '/allcampuses/' + this.props.match.params.campusId }) : _react2.default.createElement(
         'div',
         null,
         _react2.default.createElement(
@@ -34589,7 +34589,7 @@ var HomePage = function (_Component) {
                       _react2.default.createElement(
                         'h3',
                         null,
-                        campus.name
+                        campus.name ? campus.name : "Campus"
                       ),
                       _react2.default.createElement(
                         'p',
@@ -35864,7 +35864,7 @@ var CampusFunction = function (_Component) {
             _react2.default.createElement(
               'option',
               { value: '--' },
-              'campus'
+              'Choose a campus'
             ),
             listCampus && listCampus.map(function (campus) {
               return _react2.default.createElement(
@@ -35954,7 +35954,6 @@ var Campus_Info = function (_Component) {
 
       var _state = this.state,
           name = _state.name,
-          email = _state.email,
           info = _state.info;
 
       var newCampus = { name: name, info: info };
@@ -35968,10 +35967,10 @@ var Campus_Info = function (_Component) {
     key: 'handleDelete',
     value: function handleDelete(event) {
       var campusId = event.target.id;
-      var newCampus = this.state.campuses.filter(function (campus) {
+      var newCampus = this.state.students.filter(function (campus) {
         return campus.id !== Number(campusId);
       });
-      this.setState({ campuses: newCampus });
+      this.setState({ students: newCampus });
       _axios2.default.delete('/campuses/' + campusId);
       event.stopPropagation();
     }
@@ -35985,7 +35984,6 @@ var Campus_Info = function (_Component) {
         return student.campusId === cId;
       });
 
-      console.log('LINE 48', campusStudents);
       return _react2.default.createElement(
         'div',
         { className: 'panel panel-default' },
@@ -35998,6 +35996,11 @@ var Campus_Info = function (_Component) {
             _react2.default.createElement(
               'tr',
               null,
+              _react2.default.createElement(
+                'th',
+                null,
+                'Campus ID'
+              ),
               _react2.default.createElement(
                 'th',
                 null,

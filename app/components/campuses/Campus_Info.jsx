@@ -24,7 +24,7 @@ export default class Campus_Info extends Component {
   }
 
   handleSubmit(event) {
-    const {name,email,info} = this.state;
+    const {name,info} = this.state;
     const newCampus ={name,info};
 
     axios.post('/campuses', newCampus)
@@ -35,8 +35,8 @@ export default class Campus_Info extends Component {
 
   handleDelete(event) {
     const campusId = event.target.id;
-    const newCampus = this.state.campuses.filter(campus => campus.id !== Number(campusId));
-    this.setState({campuses: newCampus});
+    const newCampus = this.state.students.filter(campus => campus.id !== Number(campusId));
+    this.setState({students: newCampus});
     axios.delete(`/campuses/${campusId}`);
     event.stopPropagation();
   }
@@ -45,12 +45,12 @@ render() {
     const cId = Number(this.props.match.params.campusId);
     const campusStudents = this.state.students.filter(student => student.campusId === cId);
 
-    console.log('LINE 48', campusStudents)
     return (
      <div className="panel panel-default">
         <table className="table">
             <thead>
               <tr>
+                <th>Campus ID</th>
                 <th>Name</th>
                 <th>Info</th>
                 <th>Options</th>

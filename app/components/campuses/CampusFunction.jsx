@@ -33,7 +33,7 @@ export default class CampusFunction extends Component {
                 onChange={this.handleChange}>
 
               <input type="submit"/>
-                <option value="--">campus</option>
+                <option value="--">Choose a campus</option>
                 {
                   listCampus&&listCampus.map((campus)=>{
                     return (<option key={campus.id} value={campus.id}>{campus.name}</option>)

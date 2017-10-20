@@ -27,7 +27,7 @@ export default class Campus_Edit extends Component {
   }
   render() {
 
-    return (this.state.redirect)? (<Redirect to='/allcampuses'/>) :
+    return (this.state.redirect)? (<Redirect to={`/allcampuses/${this.props.match.params.campusId}`}/>) :
        (
         <div>
           <h1> Campus Info </h1>

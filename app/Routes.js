@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { Router} from 'react-router';
+import {Router} from 'react-router';
 import {
          Link,
          Redirect,
          Route,
          Switch
        } from 'react-router-dom';
-import createBrowserHistory from 'history/createBrowserHistory'
+import createBrowserHistory from 'history/createBrowserHistory';
 const newHistory = createBrowserHistory();
 
 import Root from './components/Root';

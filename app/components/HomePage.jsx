@@ -36,7 +36,7 @@ export default class HomePage extends Component {
                               <div className="thumbnail">
                                   <img alt="100%x200" src={imageUrl} style={{height:"200px", width: "100%", display: 'block'}}/>
                                   <div className="caption">
-                                    <h3>{campus.name}</h3>
+                                    <h3>{campus.name? (campus.name):"Campus"}</h3>
                                     <p>{campus.info? (campus.info.length > 16? campus.info.slice(0,16) : campus.info) : "Oh Happy Day"}</p>
                                   </div>
                               </div>
