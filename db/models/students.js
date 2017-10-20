@@ -8,7 +8,9 @@ const Students = db.define('students',{
   },
   email: {
     type : Sequelize.STRING,
-    isEmail: true,
+    validate:{
+      isEmail: true,
+    }
   },
   info: {
     type : Sequelize.STRING,

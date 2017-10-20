@@ -22,6 +22,7 @@ export default class CampusFunction extends Component {
 
   render(){
     const listCampus = this.state.campuses;
+
       return !listCampus ? (<h1> Empty Campus </h1>):
       (
         <div className="form-group">
@@ -29,11 +30,10 @@ export default class CampusFunction extends Component {
               Campus:
               <select
                 name="campus"
-                value={this.campusId}
                 onChange={this.handleChange}>
 
-              <input type="submit" value="Submit" />
-                <option value="--">--</option>
+              <input type="submit"/>
+                <option value="--">campus</option>
                 {
                   listCampus&&listCampus.map((campus)=>{
                     return (<option key={campus.id} value={campus.id}>{campus.name}</option>)

@@ -35843,6 +35843,7 @@ var CampusFunction = function (_Component) {
     key: 'render',
     value: function render() {
       var listCampus = this.state.campuses;
+
       return !listCampus ? _react2.default.createElement(
         'h1',
         null,
@@ -35858,13 +35859,12 @@ var CampusFunction = function (_Component) {
             'select',
             {
               name: 'campus',
-              value: this.campusId,
               onChange: this.handleChange },
-            _react2.default.createElement('input', { type: 'submit', value: 'Submit' }),
+            _react2.default.createElement('input', { type: 'submit' }),
             _react2.default.createElement(
               'option',
               { value: '--' },
-              '--'
+              'campus'
             ),
             listCampus && listCampus.map(function (campus) {
               return _react2.default.createElement(
@@ -35928,7 +35928,7 @@ var Campus_Info = function (_Component) {
     var _this = _possibleConstructorReturn(this, (Campus_Info.__proto__ || Object.getPrototypeOf(Campus_Info)).call(this, props));
 
     _this.state = {
-      students: {},
+      students: [],
       redirect: false
     };
     _this.handleSubmit = _this.handleSubmit.bind(_this);
@@ -35941,20 +35941,7 @@ var Campus_Info = function (_Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
-      var campusId = this.props.match.params.id;
-
-      // axios.get(`/students`)
-      //      .then(res => res.data)
-      //      .then(campus => this.setState({campus}))
-      //      .catch(console.error);
-
-      // axios.get(`/students/${campusId}`)
-      //     .then(response=> response.data)
-      //     .then(students => this.setState({students}))
-      //     .catch(console.error);
-
-
-      _axios2.default.get('/campuses/' + campusId).then(function (response) {
+      _axios2.default.get('/students').then(function (response) {
         return response.data;
       }).then(function (students) {
         return _this2.setState({ students: students });
@@ -35993,14 +35980,13 @@ var Campus_Info = function (_Component) {
     value: function render() {
       var _this4 = this;
 
-      var campusStudents = this.state.students;
-      console.log('LINE44', this.state);
-      console.log('LINE45', campusStudents);
-      return !campusStudents ? _react2.default.createElement(
-        'div',
-        null,
-        'No Students'
-      ) : _react2.default.createElement(
+      var cId = Number(this.props.match.params.campusId);
+      var campusStudents = this.state.students.filter(function (student) {
+        return student.campusId === cId;
+      });
+
+      console.log('LINE 48', campusStudents);
+      return _react2.default.createElement(
         'div',
         { className: 'panel panel-default' },
         _react2.default.createElement(
@@ -36032,10 +36018,10 @@ var Campus_Info = function (_Component) {
           _react2.default.createElement(
             'tbody',
             null,
-            campusStudents && campusStudents.map(function (studentInCampus) {
-              _react2.default.createElement(
+            campusStudents[0] && campusStudents.map(function (studentInCampus) {
+              return _react2.default.createElement(
                 'tr',
-                null,
+                { key: studentInCampus.id },
                 _react2.default.createElement(
                   'th',
                   { scope: 'row' },
@@ -36045,6 +36031,11 @@ var Campus_Info = function (_Component) {
                   'td',
                   null,
                   studentInCampus.name
+                ),
+                _react2.default.createElement(
+                  'td',
+                  null,
+                  studentInCampus.email
                 ),
                 _react2.default.createElement(
                   'td',

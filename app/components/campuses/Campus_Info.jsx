@@ -8,7 +8,7 @@ export default class Campus_Info extends Component {
   constructor(props){
     super(props);
     this.state={
-      students:{},
+      students:[],
       redirect:false,
     };
     this.handleSubmit=this.handleSubmit.bind(this);
@@ -16,20 +16,8 @@ export default class Campus_Info extends Component {
   }
 
   componentDidMount(){
-    const campusId = this.props.match.params.id;
 
-    // axios.get(`/students`)
-    //      .then(res => res.data)
-    //      .then(campus => this.setState({campus}))
-    //      .catch(console.error);
-
-    // axios.get(`/students/${campusId}`)
-    //     .then(response=> response.data)
-    //     .then(students => this.setState({students}))
-    //     .catch(console.error);
-
-
-      axios.get(`/campuses/${campusId}`)
+    axios.get('/students')
         .then(response=> response.data)
         .then(students => this.setState({students}))
         .catch(console.error);
@@ -54,11 +42,11 @@ export default class Campus_Info extends Component {
   }
 
 render() {
-    const campusStudents = this.state.students;
-    console.log('LINE44', this.state);
-    console.log('LINE45', campusStudents);
-    return (!campusStudents)? (<div>No Students</div>):
-    (
+    const cId = Number(this.props.match.params.campusId);
+    const campusStudents = this.state.students.filter(student => student.campusId === cId);
+
+    console.log('LINE 48', campusStudents)
+    return (
      <div className="panel panel-default">
         <table className="table">
             <thead>
@@ -70,10 +58,12 @@ render() {
             </thead>
             <tbody>
             {
-              campusStudents&&campusStudents.map(studentInCampus =>{
-                <tr>
+              campusStudents[0]&&campusStudents.map(studentInCampus =>{
+                return (
+                <tr key={studentInCampus.id}>
                   <th scope="row">{studentInCampus.id}</th>
                     <td>{studentInCampus.name}</td>
+                    <td>{studentInCampus.email}</td>
                     <td>{studentInCampus.info}</td>
                     <td>
                       <button>
@@ -87,6 +77,7 @@ render() {
                       </Link>
                     </td>
                 </tr>
+                )
               })
             }
             </tbody>

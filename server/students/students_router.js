@@ -23,17 +23,9 @@ router.get('/',(req,res,next)=>{
 
 // GET students/:studentId
 router.get('/:studentId',(req,res,next)=>{
-  // Students.findById(req.id)
-  //   .then(student => res.json(student))
-  //   .catch(next);
-  Students.findAll({
-        where:{campusId: req.id},
-        include: [{model: Campuses}]
-      })
+  Students.findById(req.id)
     .then(student => res.json(student))
     .catch(next);
-
-
 })
 
 // POST students
