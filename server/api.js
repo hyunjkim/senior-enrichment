@@ -8,11 +8,8 @@ const db = require('../db')
 
 api.get('/hello', (req, res) => res.send({hello: 'world'}));
 
-api.use('/students', require('./students'));
-api.use('/campuses', require('./campuses'));
-
 api.use((req, res, next) => {
-  res.status(404).send('Not found');
+  res.status(404).send('Why are you in the api router?');
 });
 
 module.exports = api
