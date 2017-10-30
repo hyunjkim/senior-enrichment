@@ -58,6 +58,7 @@ export default class AllStudents extends Component {
     const listStudents = this.state.students;
 
     if(this.state.edit) return (<Student {...this.props}/>);
+    console.log('LINE 61', this.state);
 
     return (
       <div className="panel panel-default">
@@ -112,7 +113,7 @@ export default class AllStudents extends Component {
             <table className="table table-hover">
                 <thead>
                   <tr>
-                    <th>#</th>
+                    <th>Student ID</th>
                     <th>Name</th>
                     <th>Email</th>
                     <th>Info</th>
@@ -134,7 +135,7 @@ export default class AllStudents extends Component {
                             <td>{student.info}</td>
 
                             <Link to={`/allcampuses/info/${student.campusId}`}>
-                              <td>{student.campusId}</td>
+                              <td>{student.campus.name}</td>
                             </Link>
                             <td>
                               <button

@@ -35747,6 +35747,7 @@ var AllStudents = function (_Component) {
       var listStudents = this.state.students;
 
       if (this.state.edit) return _react2.default.createElement(Student, this.props);
+      console.log('LINE 61', this.state);
 
       return _react2.default.createElement(
         'div',
@@ -35833,7 +35834,7 @@ var AllStudents = function (_Component) {
                 _react2.default.createElement(
                   'th',
                   null,
-                  '#'
+                  'Student ID'
                 ),
                 _react2.default.createElement(
                   'th',
@@ -35899,7 +35900,7 @@ var AllStudents = function (_Component) {
                     _react2.default.createElement(
                       'td',
                       null,
-                      student.campusId
+                      student.campus.name
                     )
                   ),
                   _react2.default.createElement(

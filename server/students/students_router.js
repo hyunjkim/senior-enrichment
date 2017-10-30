@@ -16,15 +16,20 @@ router.param('studentId', function(req, res, next, studentId) {
 
 // GET students
 router.get('/',(req,res,next)=>{
-  Students.findAll()
+  Students.findAll({include:[{all: true}]})
     .then(student => res.json(student))
     .catch(next);
 })
 
 // GET students/:studentId
 router.get('/:studentId',(req,res,next)=>{
-  Students.findById(req.id)
-    .then(student => res.json(student))
+  const studentId = req.params.studentId;
+
+  Students.findOne({
+      where:{id:studentId},
+      include:[{all: true}]
+    })
+    .then(campus => res.json(campus))
     .catch(next);
 })
 
