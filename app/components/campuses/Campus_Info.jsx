@@ -34,10 +34,10 @@ export default class Campus_Info extends Component {
   }
 
   handleDelete(event) {
-    const campusId = event.target.id;
-    const newCampus = this.state.students.filter(campus => campus.id !== Number(campusId));
+    const studentId = event.target.id;
+    const newCampus = this.state.students.filter(campus => campus.id !== Number(studentId));
     this.setState({students: newCampus});
-    axios.delete(`/campuses/${campusId}`);
+    axios.delete(`/students/${studentId}`);
     event.stopPropagation();
   }
 
