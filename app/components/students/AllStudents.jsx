@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import Student from './Student';
+import StudentInfo from './Student_Info';
 import CampusFunction from '../campuses/CampusFunction';
-import {Link} from 'react-router-dom';
+import {Link, NavLink} from 'react-router-dom';
 
 const initialState = {
       name: "",
@@ -102,10 +102,14 @@ export default class AllStudents extends Component {
             handleChange={this.handleChange}
             handleSubmit={this.handleSubmit}/>
           </div>
-            <input type="submit" value="Submit" />
+
+          <input
+            type="submit"
+            value="Submit"
+            className="btn btn-default btn-sm"/>
         </form>
-        <div >
-            <table className="table">
+        <div>
+            <table className="table table-hover">
                 <thead>
                   <tr>
                     <th>#</th>
@@ -122,18 +126,36 @@ export default class AllStudents extends Component {
                       <tbody key={student.id}>
                         <tr>
                           <th scope="row">{student.id}</th>
-                            <td>{student.name}</td>
+
+                            <Link to={`/allstudents/info/${student.campusId}/${student.id}`}>
+                              <td>{student.name}</td>
+                            </Link>
                             <td>{student.email}</td>
                             <td>{student.info}</td>
-                            <td>{student.campusId}</td>
+
+                            <Link to={`/allcampuses/info/${student.campusId}`}>
+                              <td>{student.campusId}</td>
+                            </Link>
                             <td>
-                              <button>
-                                <span id={student.id}  onClick={this.handleDelete} className="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                              <button
+                                type="button"
+                                className="btn btn-default btn-sm">
+                                <span
+                                  id={student.id}
+                                  onClick={this.handleDelete}
+                                  className="glyphicon glyphicon-remove"
+                                  aria-hidden="true">
+                                </span>
                               </button>
 
                               <Link to={`/allstudents/edit/${student.id}`}>
-                                <button>
-                                  <span className="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                              <button
+                                type="button"
+                                className="btn btn-default btn-sm">
+                                  <span
+                                    className="glyphicon glyphicon-pencil"
+                                    aria-hidden="true">
+                                  </span>
                                 </button>
                               </Link>
                             </td>
@@ -148,3 +170,4 @@ export default class AllStudents extends Component {
     )
   }
 }
+

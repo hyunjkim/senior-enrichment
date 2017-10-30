@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import CampusEdit from './Campus_Edit';
 import {Link} from 'react-router-dom';
+import CampusEdit from './Campus_Edit';
 
 const initialState = {
       name: "",
@@ -46,11 +46,14 @@ export default class AllCampuses extends Component {
   render() {
     const listCampuses = this.state.campuses;
 
-    if(this.state.edit) return (<CampusEdit {...this.props}/>);
+    // if(this.state.edit) return (<CampusEdit {...this.props}/>);
 
     return (
-      <div className="panel panel-default">
-         <form style={{display: 'flex', justifyContent: 'center'}} className="form-inline" onSubmit={this.handleSubmit} >
+      <div className="panel panel-default center">
+        <form
+          style={{display: 'flex', justifyContent: 'center'}}
+          className="form-inline"
+          onSubmit={this.handleSubmit} >
           <div className="form-group">
             <label>
               Name:
@@ -58,8 +61,7 @@ export default class AllCampuses extends Component {
                   type="name"
                   value={this.state.name}
                   onChange={(e) => this.setState({name: e.target.value })}
-                  placeholder="Name"
-                 />
+                  placeholder="Name"/>
              </label>
           </div>
           <div className="form-group">
@@ -69,16 +71,19 @@ export default class AllCampuses extends Component {
                   type="info"
                   value={this.state.info}
                   onChange={(e) => this.setState({info: e.target.value })}
-                  placeholder="Info"
-                 />
+                  placeholder="Info"/>
              </label>
-           <input type="submit" value="Submit" />
+             <input
+              type="submit"
+              value="Submit"
+              className="btn btn-default btn-sm"/>
           </div>
         </form>
         <div >
             <table className="table">
                 <thead>
                   <tr>
+                    <th>Campus Id</th>
                     <th>Name</th>
                     <th>Info</th>
                     <th>Options</th>
@@ -90,16 +95,42 @@ export default class AllCampuses extends Component {
                       <tbody key={campus.id}>
                         <tr>
                           <th scope="row">{campus.id}</th>
-                            <td>{campus.name}</td>
+                            <Link
+                              to={`/allcampuses/info/${campus.id}`}>
+                              <td>{campus.name}</td>
+                            </Link>
                             <td>{campus.info}</td>
                             <td>
-                              <button>
-                                <span id={campus.id}  onClick={this.handleDelete} className="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                              <button
+                                  type="button"
+                                  className="btn btn-default btn-sm">
+                                <span
+                                  id={campus.id}
+                                  onClick={this.handleDelete}
+                                  className="glyphicon glyphicon-remove"
+                                  aria-hidden="true"></span>
                               </button>
 
                               <Link to={`/allcampuses/edit/${campus.id}`}>
-                                <button>
-                                  <span className="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                                <button
+                                  type="button"
+                                  className="btn btn-default btn-sm">
+                                  <span
+                                    className="glyphicon glyphicon-pencil"
+                                    aria-hidden="true">
+                                  </span>
+                                </button>
+                              </Link>
+
+                              <Link to={`/allcampuses/info/${campus.id}`}>
+                                <button
+                                  type="button"
+                                  className="btn btn-default btn-sm">
+                                  <span
+                                    className="glyphicon glyphicon-user"
+                                    aria-hidden="true">
+                                  </span>
+                                  Students
                                 </button>
                               </Link>
                             </td>

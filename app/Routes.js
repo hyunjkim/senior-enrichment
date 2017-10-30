@@ -12,10 +12,11 @@ const newHistory = createBrowserHistory();
 import Root from './components/Root';
 import HomePage from './components/HomePage';
 import AllStudents from './components/students/AllStudents';
-import Student from './components/students/Student';
+import StudentEdit from './components/students/Student_Edit';
+import StudentInfo from './components/students/Student_Info';
 import CampusEdit from './components/campuses/Campus_Edit';
 import CampusInfo from './components/campuses/Campus_Info';
-import Campuses from './components/campuses/Campuses';
+import Campuses from './components/campuses/AllCampuses';
 import Navbar from './components/Navbar';
 
 /* -----------------    COMPONENT     ------------------ */
@@ -32,9 +33,10 @@ export default class Routes extends Component {
               <div>
                <Switch>
                 <Route exact path="/allstudents" component={AllStudents}/>
-                <Route path="/allstudents/edit/:studentId" component={Student} />
+                <Route exact path="/allstudents/edit/:studentId" component={StudentEdit} />
+                <Route exact path="/allstudents/info/:campusId/:studentId" component={StudentInfo} />
                 <Route exact path="/allcampuses" component={Campuses} />
-                <Route path="/allcampuses/edit/:campusId" component={CampusEdit} />
+                <Route exact path="/allcampuses/edit/:campusId" component={CampusEdit} />
                 <Route exact path="/allcampuses/info/:campusId" component={CampusInfo} />
                 <Route path="/" component={HomePage} />
                 <Redirect to="/"/>

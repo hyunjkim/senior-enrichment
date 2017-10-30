@@ -19,6 +19,12 @@ router.get('/',(req,res,next)=>{
   Campuses.findAll()
     .then(campus => res.json(campus))
     .catch(next);
+    // Campuses.findAll({
+    //   where:{id:req.id},
+    //   include:[{all: true}]
+    // })
+    // .then(campus => res.json(campus))
+    // .catch(next);
 })
 
 // GET campuses/:campusId
@@ -26,9 +32,11 @@ router.get('/:campusId',(req,res,next)=>{
   // Campuses.findById(req.id)
   //   .then(campus => res.json(campus))
   //   .catch(next);
-  Campuses.findAll({
-      where:{id:req.id},
-      includes:[{model: Students}]
+  const campusId = req.params.campusId;
+
+  Campuses.findOne({
+      where:{id:campusId},
+      include:[{all: true}]
     })
     .then(campus => res.json(campus))
     .catch(next);
